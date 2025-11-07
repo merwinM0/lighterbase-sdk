@@ -42,13 +42,6 @@ export default class LighterBase {
   private baseURL: string;
   private tokenProvider: TokenProvider;
 
-  /**
-   * @param baseURL      接口基地址
-   * @param tokenProvider 可选：
-   *                       - 字符串：固定 token
-   *                       - 函数  ：每次请求动态返回 token
-   *                       - 不传  ：自动尝试读浏览器 cookie（authToken）
-   */
   constructor(baseURL: string, tokenProvider?: TokenProvider) {
     if (!baseURL || typeof baseURL !== 'string') {
       throw new Error('Lighterbase 初始化失败：必须传入一个有效的基准 URL 字符串。');
@@ -88,7 +81,7 @@ export default class LighterBase {
       if (token) headers.Authorization = `Bearer ${token}`;
 
       const config: RequestInit = { method, headers };
-      if (payload && method !== 'GET' && method !== 'DELETE') {
+      if (payload && method !== 'GET') {
         config.body = JSON.stringify(payload);
       }
 

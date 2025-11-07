@@ -31,13 +31,6 @@ type TokenProvider = string | (() => string);
 declare class LighterBase {
     private baseURL;
     private tokenProvider;
-    /**
-     * @param baseURL      接口基地址
-     * @param tokenProvider 可选：
-     *                       - 字符串：固定 token
-     *                       - 函数  ：每次请求动态返回 token
-     *                       - 不传  ：自动尝试读浏览器 cookie（authToken）
-     */
     constructor(baseURL: string, tokenProvider?: TokenProvider);
     private defaultBrowserToken;
     private getAuthToken;
